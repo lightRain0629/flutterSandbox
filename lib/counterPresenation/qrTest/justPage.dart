@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_tests/testCamQr.dart';
+import 'package:flutter_bloc_tests/counterPresenation/qrTest/testCamQr.dart';
 
 class JustPage extends StatelessWidget {
   const JustPage({super.key});

@@ -1,18 +1,15 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:io';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_tests/justPage.dart';
-import 'package:flutter_bloc_tests/logic/cubit/settings_cubit.dart';
-import 'package:flutter_bloc_tests/testCamQr.dart';
+import 'package:flutter_bloc_tests/counterPresenation/counterTestScreens/homePage.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_bloc_tests/logic/cubit/cubitInternet/internet_cubit.dart';
-import 'package:flutter_bloc_tests/presentation/colors/colorSchemes.dart';
-import 'package:flutter_bloc_tests/presentation/routes/appRoutes.dart';
+import 'package:flutter_bloc_tests/counterPresenation/colors/colorSchemes.dart';
+import 'package:flutter_bloc_tests/counterPresenation/routes/appRoutes.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'logic/cubit/couter_cubit_cubit.dart';
+import 'counterAndInetLogic/cubit/cubitInternet/internet_cubit.dart';
+import 'counterAndInetLogic/cubit/settings_cubit.dart';
+import 'counterAndIntetLogin/cubit/couter_cubit_cubit.dart';
+ 
 
 void main() async {
 
@@ -52,7 +49,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
         darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
         // onGenerateRoute: appRouter.onGenerateRoute,
-        home:   JustPage( ),
+        home:   HomePage(),
       ),
     );
   }

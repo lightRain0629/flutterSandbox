@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_tests/logic/cubit/settings_cubit.dart';
+
+import '../../counterAndInetLogic/cubit/settings_cubit.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});

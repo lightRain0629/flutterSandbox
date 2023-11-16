@@ -38,6 +38,9 @@ dependencies:
   page_transition: ^2.0.9
   path_provider: ^2.0.15
   qr_code_scanner: ^1.0.1
+  http:
+  shared_preferences: ^2.2.2
+  
 
 dev_dependencies:
   flutter_lints: ^2.0.0

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_tests/constants/enums.dart';
-import 'package:flutter_bloc_tests/logic/cubit/cubitInternet/internet_cubit.dart';
-import '../../logic/cubit/couter_cubit_cubit.dart';
+
+import '../../counterAndInetLogic/cubit/couter_cubit_cubit.dart';
+import '../../counterAndInetLogic/cubit/cubitInternet/internet_cubit.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

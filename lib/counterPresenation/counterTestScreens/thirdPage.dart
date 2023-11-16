@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../logic/cubit/couter_cubit_cubit.dart';
+import '../../counterAndInetLogic/cubit/couter_cubit_cubit.dart';
+
 
 class ThirdPage extends StatelessWidget {
   const ThirdPage({super.key});

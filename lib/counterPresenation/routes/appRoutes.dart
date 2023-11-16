@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_tests/presentation/screens/homePage.dart';
-import 'package:flutter_bloc_tests/presentation/screens/secondPage.dart';
-import 'package:flutter_bloc_tests/presentation/screens/settingsPage.dart';
-import 'package:flutter_bloc_tests/presentation/screens/thirdPage.dart';
+import 'package:flutter_bloc_tests/counterPresenation/counterTestScreens/homePage.dart';
+import 'package:flutter_bloc_tests/counterPresenation/counterTestScreens/secondPage.dart';
+import 'package:flutter_bloc_tests/counterPresenation/counterTestScreens/settingsPage.dart';
+import 'package:flutter_bloc_tests/counterPresenation/counterTestScreens/thirdPage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../screens/gridViewTest.dart';
+import '../counterTestScreens/gridViewTest.dart';
 
 class AppRouter {
   Route onGenerateRoute(RouteSettings routeSettings) {
