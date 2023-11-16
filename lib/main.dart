@@ -2,13 +2,16 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_tests/counterPresenation/counterTestScreens/homePage.dart';
+import 'package:flutter_bloc_tests/savingOrderTest/logic/bloc/cubit/draft_orders_cubit.dart';
+import 'package:flutter_bloc_tests/savingOrderTest/logic/bloc/draft_orders_bloc.dart';
+import 'package:flutter_bloc_tests/savingOrderTest/presentation/draftOrdersScreen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc_tests/counterPresenation/colors/colorSchemes.dart';
 import 'package:flutter_bloc_tests/counterPresenation/routes/appRoutes.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'counterAndInetLogic/cubit/couter_cubit_cubit.dart';
 import 'counterAndInetLogic/cubit/cubitInternet/internet_cubit.dart';
 import 'counterAndInetLogic/cubit/settings_cubit.dart';
-import 'counterAndIntetLogin/cubit/couter_cubit_cubit.dart';
  
 
 void main() async {
@@ -42,6 +45,12 @@ class MyApp extends StatelessWidget {
         BlocProvider<CounterCubit>(
           create: (context) => CounterCubit(),
         ),
+        BlocProvider<DraftOrdersBloc>(
+          create: (context) => DraftOrdersBloc(),
+        ),
+        BlocProvider<DraftOrdersCubit>(
+          create: (context) => DraftOrdersCubit(),
+        ),
         BlocProvider<SettingsCubit>(create: (context)=> SettingsCubit())
       ],
       child: MaterialApp(
@@ -49,7 +58,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
         darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
         // onGenerateRoute: appRouter.onGenerateRoute,
-        home:   HomePage(),
+        home:   DraftOrderScreen(),
+        // home:   HomePage(),
       ),
     );
   }

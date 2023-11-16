@@ -16,7 +16,7 @@ class DraftOrdersBloc extends Bloc<DraftOrdersEvent, DraftOrdersState>
   DraftOrdersBloc()
       : super(DraftOrdersState(
             sendableOrder: SendableOrderModel(
-                comment: '',
+                comment: 'init',
                 forConsignment: false,
                 orderDate: DateTime(0).toString(),
                 creditDate: DateTime(0).toString(),
@@ -25,8 +25,8 @@ class DraftOrdersBloc extends Bloc<DraftOrdersEvent, DraftOrdersState>
                 dets: [],
                 customerId: 0,
                 payTypeId: 0))) {
-    on<DraftOrdersEvent>((event, emit) {
-      // TODO: implement event handler
+    on<AddDraft>((event, emit) {
+      emit(DraftOrdersState(sendableOrder: event.draft));
     });
   }
 
