@@ -1,40 +1,30 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc_tests/savingOrderTest/models/sendableOrderModel.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-
-
 
 part 'draft_orders_state.dart';
 
 class DraftOrdersCubit extends Cubit<DraftOrderState> with HydratedMixin {
-  DraftOrdersCubit()
-      : super(DraftOrderState(
-            comment: 'init',
-            forConsignment: false,
-            orderDate: DateTime(0).toString(),
-            creditDate: DateTime(0).toString(),
-            orderSum: 0,
-            orderSumWithDiscount: 0,
-            // dets: [],
-            customerId: 0,
-            payTypeId: 0));
+  DraftOrdersCubit() : super(const DraftOrderState(drafts: []));
 
-  void addDraft() => emit(DraftOrderState(
-      comment: 'not innit',
-      forConsignment: false,
-      orderDate: DateTime(0).toString(),
-      creditDate: DateTime(0).toString(),
-      orderSum: 0,
-      orderSumWithDiscount: 0,
-      // dets: [],
-      customerId: 0,
-      payTypeId: 0));
+  void addDraft(draft) =>
+      emit(DraftOrderState(drafts: List.from(state.drafts)..add(draft)));
+  void clearDrafts() =>
+      emit(const DraftOrderState(drafts: []));
 
   @override
   DraftOrderState? fromJson(Map<String, dynamic> json) {
-    return DraftOrderState.fromMap(json);
+    final drafts =
+        (json['drafts'] as List<dynamic>).cast<Map<String, dynamic>>();
+
+    return DraftOrderState(
+        drafts:
+            drafts.map((draft) => SendableOrderModel.fromJson(draft)).toList());
   }
 
   @override

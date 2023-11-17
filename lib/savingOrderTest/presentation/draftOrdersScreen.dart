@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_tests/savingOrderTest/models/sendableOrderModel.dart';
@@ -14,43 +16,47 @@ class DraftOrderScreen extends StatelessWidget {
     return Scaffold(
       body: BlocBuilder<DraftOrdersCubit, DraftOrderState>(
         builder: (context, ordersState) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          return Stack(
             children: [
-              Builder(builder: (context) {
-                final counterVal = context
-                    .select((DraftOrdersCubit cubit) => cubit.state.comment);
-                return Text('Cntr ' + counterVal.toString());
-              }),
-              TextButton(
+              Expanded(
+                child: ListView.builder(
+                    itemCount: ordersState.drafts.length,
+                    itemBuilder: ((context, index) {
+                      final draft = ordersState.drafts[index];
+                      return ListTile(
+                        title: Text(draft.comment),
+                      );
+                    })),
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.delete,
+                  ),
                   onPressed: () {
-                    // context.read<DraftOrdersCubit>().add(AddDraft(
-                    //     draft: SendableOrderModel(
-                    //         comment: 'not init',
-                    //         forConsignment: false,
-                    //         orderDate: DateTime(0).toString(),
-                    //         creditDate: DateTime(0).toString(),
-                    //         orderSum: 0,
-                    //         orderSumWithDiscount: 0,
-                    //         dets: [],
-                    //         customerId: 0,
-                    //         payTypeId: 0)));
-                    // BlocProvider.of<DraftOrdersCubit>(context).addDraft(
-                    //     SendableOrderModel(
-                    //         comment: 'not init',
-                    //         forConsignment: false,
-                    //         orderDate: DateTime(0).toString(),
-                    //         creditDate: DateTime(0).toString(),
-                    //         orderSum: 0,
-                    //         orderSumWithDiscount: 0,
-                    //         dets: [],
-                    //         customerId: 0,
-                    //         payTypeId: 0));
-                    context.read<DraftOrdersCubit>().addDraft(
-                         );
+                    context.read<DraftOrdersCubit>().clearDrafts();
                   },
-                  child: Text('add order'))
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: TextButton(
+                    onPressed: () {
+                      context.read<DraftOrdersCubit>().addDraft(
+                          SendableOrderModel(
+                              forConsignment: false,
+                              customerId: 0,
+                              payTypeId: 0,
+                              orderDate: '',
+                              creditDate: '',
+                              comment: Random.secure().nextDouble().toString(),
+                              dets: [],
+                              orderSum: 0,
+                              orderSumWithDiscount: 0));
+                    },
+                    child: const Text('Add draft')),
+              )
             ],
           );
         },

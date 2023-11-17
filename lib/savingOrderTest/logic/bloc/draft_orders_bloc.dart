@@ -6,7 +6,6 @@ import 'package:flutter_bloc_tests/savingOrderTest/models/sendableOrderModel.dar
 import 'package:flutter_bloc_tests/savingOrderTest/presentation/draftOrdersScreen.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-import '../../models/sendableProductModel.dart';
 
 part 'draft_orders_event.dart';
 part 'draft_orders_state.dart';
