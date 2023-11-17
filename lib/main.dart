@@ -2,8 +2,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_tests/counterPresenation/counterTestScreens/homePage.dart';
-import 'package:flutter_bloc_tests/savingOrderTest/logic/bloc/draft_orders_bloc.dart';
 import 'package:flutter_bloc_tests/savingOrderTest/logic/cubit/draft_orders_cubit.dart';
+import 'package:flutter_bloc_tests/savingOrderTest/presentation/customersList.dart';
 import 'package:flutter_bloc_tests/savingOrderTest/presentation/draftOrdersScreen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc_tests/counterPresenation/colors/colorSchemes.dart';
@@ -22,6 +22,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build(
       storageDirectory: await  getApplicationDocumentsDirectory());
+      
 
   runApp(MyApp(
     appRouter: AppRouter(),
@@ -48,9 +49,6 @@ class MyApp extends StatelessWidget {
         BlocProvider<CounterCubit>(
           create: (context) => CounterCubit(),
         ),
-        BlocProvider<DraftOrdersBloc>(
-          create: (context) => DraftOrdersBloc(),
-        ),
         BlocProvider<DraftOrdersCubit>(
           create: (context) => DraftOrdersCubit(),
         ),
@@ -61,7 +59,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
         darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
         // onGenerateRoute: appRouter.onGenerateRoute,
-        home:   DraftOrderScreen(),
+        home:   CustomersPage(),
         // home:   HomePage(),
       ),
     );

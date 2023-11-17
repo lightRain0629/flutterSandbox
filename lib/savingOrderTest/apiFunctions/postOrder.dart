@@ -3,24 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 bool isEnabledButtonCreateOrder = true;
 
 class PostOrder {
   Future<dynamic> postOrder(
-      bool forConsignment,
-      int customerId,
-      int payTypeId,
-      dynamic creditToDate,
-      String comment,
-      List<Object> dets,
-      DateTime orderDate,
-      num orderSum,
-      num orderSumWithDiscount,
-      BuildContext context,
-      String uri) async {
-    final preferences = await SharedPreferences.getInstance();
-    final token = preferences.getString('token');
+    bool forConsignment,
+    int customerId,
+    int payTypeId,
+    dynamic creditToDate,
+    String comment,
+    List<Object> dets,
+    DateTime orderDate,
+    num orderSum,
+    num orderSumWithDiscount,
+    BuildContext context,
+  ) async {
+    const token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOlsid2FyZWhvdXNlIl0sImlkIjo2NzcsImlhdCI6MTcwMDIzMTY4NCwiZXhwIjoxNzAwMjc0ODg0fQ._BykHWs_HhJ7vkXjkASHN6aPk3QT1vfkoVP6CXLMPBE';
+
     String endpoint = '/api/v1/goodTempOrders';
 
     Object dataToSend = {
@@ -35,9 +35,8 @@ class PostOrder {
       "orderSumWithDiscount": orderSumWithDiscount
     };
     isEnabledButtonCreateOrder = false;
-
-    // final response = await http.post(Uri.parse(ProductionAddress().uri + endpoint),
-    final response = await http.post(Uri.parse(uri + endpoint),
+    final response = await http.post(
+        Uri.parse('http://95.85.116.130:233$endpoint'),
         body: jsonEncode(dataToSend),
         headers: {
           'accept': 'application/json',
@@ -53,14 +52,12 @@ class PostOrder {
       return body;
     } else if (response.statusCode == 401) {
       isEnabledButtonCreateOrder = true;
-      Navigator.of(context).pushReplacementNamed('/login');
       // throw Exception();
     } else if (response.statusCode == 400) {
       isEnabledButtonCreateOrder = true;
       throw Exception();
     } else if (response.statusCode == 500) {
       isEnabledButtonCreateOrder = true;
-      Navigator.of(context).pushReplacementNamed('/serverErrorPage');
       // throw Exception();
     } else {}
   }
