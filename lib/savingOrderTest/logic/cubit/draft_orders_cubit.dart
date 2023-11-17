@@ -4,8 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-import '../../../models/sendableOrderModel.dart';
-import '../../../models/sendableProductModel.dart';
+
 
 part 'draft_orders_state.dart';
 
