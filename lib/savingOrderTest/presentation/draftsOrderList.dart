@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../logic/cubit/draft_orders_cubit.dart';
+import '../logic/draftOrderCubit/draft_orders_cubit.dart';
 
 class DraftsOrderList extends StatelessWidget {
   const DraftsOrderList({super.key});

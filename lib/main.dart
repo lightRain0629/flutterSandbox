@@ -2,7 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_tests/counterPresenation/counterTestScreens/homePage.dart';
-import 'package:flutter_bloc_tests/savingOrderTest/logic/cubit/draft_orders_cubit.dart';
+import 'package:flutter_bloc_tests/savingOrderTest/logic/draftOrderCubit/draft_orders_cubit.dart';
 import 'package:flutter_bloc_tests/savingOrderTest/presentation/customersList.dart';
 import 'package:flutter_bloc_tests/savingOrderTest/presentation/draftOrdersScreen.dart';
 import 'package:path_provider/path_provider.dart';

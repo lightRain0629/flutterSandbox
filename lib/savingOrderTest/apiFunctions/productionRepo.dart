@@ -6,14 +6,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../functions/mergeDublicatedProducts.dart';
 import '../models/productModel.dart';
 
-
-
 class ProdcutsRepository {
   Future<List<ProductModel>> getProducts(
     BuildContext context,
   ) async {
     const token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOlsid2FyZWhvdXNlIl0sImlkIjo2NzcsImlhdCI6MTcwMDIzMTY4NCwiZXhwIjoxNzAwMjc0ODg0fQ._BykHWs_HhJ7vkXjkASHN6aPk3QT1vfkoVP6CXLMPBE';
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOlsid2FyZWhvdXNlIl0sImlkIjo2NzcsImlhdCI6MTcwMDMwMDQ1NiwiZXhwIjoxNzAwMzQzNjU2fQ.xVEuY9zhYGxhjyAyx7LUUcKxwQEzJV8ovG5GYGGzVT0';
     String endpoint = '/api/v1/temp/goods?warehouseId=35';
     try {
       // final response = await http.get(Uri.parse(ProductionAddress().uri + endpoint),

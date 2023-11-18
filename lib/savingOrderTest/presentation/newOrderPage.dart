@@ -7,7 +7,8 @@ import 'package:flutter_bloc_tests/savingOrderTest/models/sendableOrderModel.dar
 import 'package:flutter_bloc_tests/savingOrderTest/presentation/productPage.dart';
 import 'package:flutter_bloc_tests/savingOrderTest/presentation/productionSearch.dart';
 
-import '../logic/cubit/draft_orders_cubit.dart';
+import '../logic/draftOrderCubit/draft_orders_cubit.dart';
+
 
 List<ProductModel> orderList = [];
 
