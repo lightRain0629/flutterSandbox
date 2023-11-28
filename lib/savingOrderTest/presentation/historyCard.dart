@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc_tests/savingOrderTest/presentation/productCardWithIcon.dart';
 import 'package:intl/intl.dart';
 
 import '../functions/formattedPriceFun.dart';
@@ -33,18 +34,9 @@ class HistoryCard extends StatelessWidget {
           },
            trailing: const SizedBox(),
           children: [
-            ListTile(
-              title: Text('Prdouct first'),
-            ),
-            ListTile(
-              title: Text('Prdouct first'),
-            ),
-            ListTile(
-              title: Text('Prdouct first'),
-            ),
-            ListTile(
-              title: Text('Prdouct first'),
-            ),
+ProductCardViewable(),
+ProductCardViewable(),
+ProductCardViewable(),
           ],
           title: Column(
             children: [
