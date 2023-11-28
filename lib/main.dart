@@ -5,6 +5,7 @@ import 'package:flutter_bloc_tests/counterPresenation/counterTestScreens/homePag
 import 'package:flutter_bloc_tests/savingOrderTest/logic/draftOrderCubit/draft_orders_cubit.dart';
 import 'package:flutter_bloc_tests/savingOrderTest/presentation/customersList.dart';
 import 'package:flutter_bloc_tests/savingOrderTest/presentation/draftOrdersScreen.dart';
+import 'package:flutter_bloc_tests/savingOrderTest/presentation/expansionTileTest.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc_tests/counterPresenation/colors/colorSchemes.dart';
 import 'package:flutter_bloc_tests/counterPresenation/routes/appRoutes.dart';
@@ -59,8 +60,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
         darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
         // onGenerateRoute: appRouter.onGenerateRoute,
-        home:   CustomersPage(),
-        // home:   HomePage(),
+        // home:   CustomersPage(),
+        home:   ExpansionTileListPage(),
       ),
     );
   }
