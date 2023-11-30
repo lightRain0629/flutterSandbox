@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "522827290037",
+    "project_id": "pushnotificationtest-16259",
+    "storage_bucket": "pushnotificationtest-16259.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522827290037:android:fc54d5abc85da77f5675fc",
+        "android_client_info": {
+          "package_name": "com.example.flutter_bloc_tests"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYUQa6LxE8plAlyxiyM1mlj4RzmMuCg8A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
