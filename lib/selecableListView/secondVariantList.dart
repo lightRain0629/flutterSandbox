@@ -1,5 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+
+
+
 import 'package:flutter/material.dart';
+
+
 
 // bool containsSelectedItems = false;
 
@@ -13,23 +17,32 @@ class _YourListViewState extends State<YourListView> {
   List<String> selectedIndices = [];
   bool containsSelectedItems = false;
 
+  late TextEditingController qtyController;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    qtyController = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: containsSelectedItems
           ? FloatingActionButton(
               onPressed: () {
-                setState(() {
-                  for (var i = 0; i < selectedIndices.length; i++) {
-                    print('====');
-                    print(selectedIndices[i]);
-                    selectedIndices[i] = 'not item';
-                    print('=====');
-                    print(selectedIndices[i]);
-                  }
-                  selectedIndices.clear();
-                  containsSelectedItems = false;
-                });
+                // setState(() {
+                //   for (var i = 0; i < selectedIndices.length; i++) {
+                //     print('====');
+                //     print(selectedIndices[i]);
+                //     selectedIndices[i] = 'not item';
+                //     print('=====');
+                //     print(selectedIndices[i]);
+                //   }
+                //   selectedIndices.clear();
+                //   containsSelectedItems = false;
+                // });
+                similarQuantitySheet(context, qtyController);
               },
               child: Icon(Icons.add),
             )
@@ -44,7 +57,7 @@ class _YourListViewState extends State<YourListView> {
           return GestureDetector(
             onLongPress: () {
               containsSelectedItems
-                  ? print('some event')
+                  ? similarQuantitySheet(context, qtyController)
                   : setState(() {
                       if (isSelected) {
                         selectedIndices.remove(item);
@@ -77,6 +90,59 @@ class _YourListViewState extends State<YourListView> {
         },
       ),
     );
+  }
+
+  Future<dynamic> similarQuantitySheet(
+      BuildContext context, TextEditingController qtyController) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+                left: 20,
+                right: 20),
+            child: Container(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  TextField(
+                    controller: qtyController,
+                    cursorColor: Theme.of(context).colorScheme.primary,
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : const Color(0xff0B1527),
+                      fontFamily: 'Inter',
+                    ),
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      hintText: 'add quantity',
+                      border: InputBorder.none,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('Cancel')),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('Add'))
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
 
