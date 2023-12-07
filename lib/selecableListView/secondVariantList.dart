@@ -1,12 +1,8 @@
-
-
-
 import 'package:flutter/material.dart';
-
-
 
 // bool containsSelectedItems = false;
 
+// todo in production create listview statefull widget or create statemanagemant for selectable products
 class YourListView extends StatefulWidget {
   @override
   _YourListViewState createState() => _YourListViewState();
@@ -15,7 +11,6 @@ class YourListView extends StatefulWidget {
 class _YourListViewState extends State<YourListView> {
   List<String> items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
   List<String> selectedIndices = [];
-  bool containsSelectedItems = false;
 
   late TextEditingController qtyController;
   @override
@@ -28,7 +23,7 @@ class _YourListViewState extends State<YourListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: containsSelectedItems
+      floatingActionButton: selectedIndices.isNotEmpty
           ? FloatingActionButton(
               onPressed: () {
                 // setState(() {
@@ -40,60 +35,75 @@ class _YourListViewState extends State<YourListView> {
                 //     print(selectedIndices[i]);
                 //   }
                 //   selectedIndices.clear();
-                //   containsSelectedItems = false;
+                //   selectedIndices.isNotEmpty = false;
                 // });
-                similarQuantitySheet(context, qtyController);
+                similarQuantitySheet(context, qtyController, selectedIndices);
               },
               child: Icon(Icons.add),
             )
           : SizedBox.shrink(),
-      appBar: AppBar(title: Text('Selectable List')),
+      appBar: AppBar(
+        title: Text('Selectable List'),
+        actions: [
+          selectedIndices.isNotEmpty
+              ? TextButton(
+                  onPressed: () {
+                    setState(() {
+                      selectedIndices.clear();
+                    });
+                  },
+                  child: Text('Clear selections'))
+              : SizedBox()
+        ],
+      ),
       body: ListView.builder(
         itemCount: items.length,
         itemBuilder: (BuildContext context, int index) {
           final item = items[index];
           final isSelected = selectedIndices.contains(item);
 
-          return GestureDetector(
-            onLongPress: () {
-              containsSelectedItems
-                  ? similarQuantitySheet(context, qtyController)
-                  : setState(() {
-                      if (isSelected) {
-                        selectedIndices.remove(item);
-                      } else {
-                        selectedIndices.add(item);
-                        // containsSelectedItems = true;
-                      }
-                      containsSelectedItems = selectedIndices.isNotEmpty;
-                    });
-            },
-            onTap: () {
-              // Handle normal tap action here
-              containsSelectedItems
-                  ? setState(() {
-                      if (isSelected) {
-                        selectedIndices.remove(item);
-                      } else {
-                        selectedIndices.add(item);
-                        // containsSelectedItems = true;
-                      }
-                      containsSelectedItems = selectedIndices.isNotEmpty;
-                    })
-                  : print('Tapped: ${items[index]}');
-            },
-            child: ListTile(
-              title: Text(items[index]),
-              tileColor: isSelected ? Colors.grey.withOpacity(0.5) : null,
-            ),
-          );
+          return card(context, isSelected, item, index);
         },
       ),
     );
   }
 
-  Future<dynamic> similarQuantitySheet(
-      BuildContext context, TextEditingController qtyController) {
+  GestureDetector card(
+      BuildContext context, bool isSelected, String item, int index) {
+    return GestureDetector(
+      onLongPress: () {
+        selectedIndices.isNotEmpty
+            ? similarQuantitySheet(context, qtyController, selectedIndices)
+            : setState(() {
+                if (isSelected) {
+                  selectedIndices.remove(item);
+                } else {
+                  selectedIndices.add(item);
+                  // selectedIndices.isNotEmpty = true;
+                }
+              });
+      },
+      onTap: () {
+        selectedIndices.isNotEmpty
+            ? setState(() {
+                if (isSelected) {
+                  selectedIndices.remove(item);
+                } else {
+                  selectedIndices.add(item);
+                  // selectedIndices.isNotEmpty = true;
+                }
+              })
+            : print('Tapped: ${items[index]}');
+      },
+      child: ListTile(
+        title: Text(items[index]),
+        tileColor: isSelected ? Colors.grey.withOpacity(0.5) : null,
+      ),
+    );
+  }
+
+  Future<dynamic> similarQuantitySheet(BuildContext context,
+      TextEditingController qtyController, List selectedIndices) {
     return showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -133,6 +143,8 @@ class _YourListViewState extends State<YourListView> {
                           child: Text('Cancel')),
                       TextButton(
                           onPressed: () {
+                            print(qtyController.toString());
+                            print(selectedIndices);
                             Navigator.pop(context);
                           },
                           child: Text('Add'))
@@ -173,7 +185,7 @@ class _YourListViewState extends State<YourListView> {
 //                 selectedIndices.remove(index);
 //               } else {
 //                 selectedIndices.add(index);
-//                 containsSelectedItems = true;
+//                 selectedIndices.isNotEmpty = true;
 //               }
 //             });
 //           },
