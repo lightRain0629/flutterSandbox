@@ -6,6 +6,7 @@ import 'package:flutter_bloc_tests/firebase_options.dart';
 import 'package:flutter_bloc_tests/notificationTests/firebaseServices/firebaseApi.dart';
 import 'package:flutter_bloc_tests/notificationTests/presentation/homePageNoti.dart';
 import 'package:flutter_bloc_tests/notificationTests/presentation/notificationScreen.dart';
+import 'package:flutter_bloc_tests/otpTest/pincodeVerificationScreen.dart';
 import 'package:flutter_bloc_tests/savingOrderTest/logic/draftOrderCubit/draft_orders_cubit.dart';
 import 'package:flutter_bloc_tests/savingOrderTest/presentation/customersList.dart';
 import 'package:flutter_bloc_tests/savingOrderTest/presentation/draftOrdersScreen.dart';
@@ -77,7 +78,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(useMaterial3: true),
         darkTheme: ThemeData.dark(useMaterial3: true),
         navigatorKey: navigatorKey,
-        home: TestLoginPage(),
+        home: PinCodeVerificationScreen(phoneNumber: '+99362939884',),
         routes: {
           NotificationScreen.route: (context)=> const NotificationScreen()
         },
