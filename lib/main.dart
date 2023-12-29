@@ -14,10 +14,13 @@ import 'package:flutter_bloc_tests/savingOrderTest/presentation/expansionTileTes
 import 'package:flutter_bloc_tests/selecableListView/secondVariantList.dart';
 import 'package:flutter_bloc_tests/selecableListView/selectableListScreen.dart';
 import 'package:flutter_bloc_tests/testUserAgent/testLoginPage.dart';
+import 'package:flutter_bloc_tests/webSocketsTest/webSocketPage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc_tests/counterPresenation/colors/colorSchemes.dart';
 import 'package:flutter_bloc_tests/counterPresenation/routes/appRoutes.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:web_socket_channel/io.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 import 'counterAndInetLogic/cubit/couter_cubit_cubit.dart';
 import 'counterAndInetLogic/cubit/cubitInternet/internet_cubit.dart';
 import 'counterAndInetLogic/cubit/settings_cubit.dart';
@@ -62,28 +65,29 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<SettingsCubit>(create: (context) => SettingsCubit())
       ],
-      child: 
-      
-      // MaterialApp(
-      //   debugShowCheckedModeBanner: false,
-      //   theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
-      //   darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-      //   // onGenerateRoute: appRouter.onGenerateRoute,
-      //   // home:   CustomersPage(),
-      //   home: HomePageNotificationTest(),
-      // )
-       
-      MaterialApp(
+      child:
+
+          // MaterialApp(
+          //   debugShowCheckedModeBanner: false,
+          //   theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+          //   darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
+          //   // onGenerateRoute: appRouter.onGenerateRoute,
+          //   // home:   CustomersPage(),
+          //   home: HomePageNotificationTest(),
+          // )
+
+          MaterialApp(
         title: 'Push notificaton',
         theme: ThemeData(useMaterial3: true),
         darkTheme: ThemeData.dark(useMaterial3: true),
         navigatorKey: navigatorKey,
-        home: PinCodeVerificationScreen(phoneNumber: '+99362939884',),
+        home: WebSocketTestPage(
+          channel: IOWebSocketChannel.connect("ws://echo.websocket.org"),
+        ),
         routes: {
-          NotificationScreen.route: (context)=> const NotificationScreen()
+          NotificationScreen.route: (context) => const NotificationScreen()
         },
-      )
-      ,
+      ),
     );
   }
 }

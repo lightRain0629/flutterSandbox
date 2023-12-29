@@ -52,6 +52,7 @@ dependencies:
   device_info: ^2.0.3
   unique_identifier: ^0.3.0
   pin_code_fields: ^8.0.1
+  web_socket_channel:
   # long_press_selectable: ^3.0.1
   
 
