@@ -13,6 +13,7 @@ import 'package:flutter_bloc_tests/savingOrderTest/presentation/draftOrdersScree
 import 'package:flutter_bloc_tests/savingOrderTest/presentation/expansionTileTest.dart';
 import 'package:flutter_bloc_tests/selecableListView/secondVariantList.dart';
 import 'package:flutter_bloc_tests/selecableListView/selectableListScreen.dart';
+import 'package:flutter_bloc_tests/sendSmsService/sendSmsTest.dart';
 import 'package:flutter_bloc_tests/testUserAgent/testLoginPage.dart';
 import 'package:flutter_bloc_tests/webSocketsTest/webSocketPage.dart';
 import 'package:path_provider/path_provider.dart';
@@ -25,6 +26,16 @@ import 'counterAndInetLogic/cubit/couter_cubit_cubit.dart';
 import 'counterAndInetLogic/cubit/cubitInternet/internet_cubit.dart';
 import 'counterAndInetLogic/cubit/settings_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+/**
+ * sms quote in eng keyboard is 145 symbols (1 sms is 145) 
+ * sms quote in ru keyboard is 60 symbols (1 sms is 60)
+ * IN SAMSUNG WE CAN SEND 3 SMS BY ONE SENDING
+ * u must have 3 services
+ * CHECK FOR VALID SIM CARD BY CHECKING COUNT OF SENT SMS
+ * SWITCH BETWEEN SIM CARDS
+ * SEND SMS TO CUSOTMER
+ */
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -84,6 +95,7 @@ class MyApp extends StatelessWidget {
         home: WebSocketTestPage(
           channel: IOWebSocketChannel.connect("ws://echo.websocket.org"),
         ),
+        // home: SendSmsTestPage(),
         routes: {
           NotificationScreen.route: (context) => const NotificationScreen()
         },

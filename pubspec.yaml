@@ -53,6 +53,7 @@ dependencies:
   unique_identifier: ^0.3.0
   pin_code_fields: ^8.0.1
   web_socket_channel:
+  telephony: ^0.2.0
   # long_press_selectable: ^3.0.1
   
 
