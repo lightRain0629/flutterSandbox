@@ -58,6 +58,7 @@ class _WebSocketTestPageState extends State<WebSocketTestPage> {
                     _sendSms(snapshot.data);
                     return Text(snapshot.data);
                   } else {
+                    print(snapshot.data);
                     return const Text('no data');
                   }
                 }))
