@@ -135,8 +135,7 @@ class MainActivity : FlutterActivity() {
             val simInfo = localList[simSlot] as SubscriptionInfo
             SmsManager.getSmsManagerForSubscriptionId(simInfo.subscriptionId).sendTextMessage(phone, null, smsContent, null, null)
         } else {
-            val sms = SmsManager.getDefault()
-            sms.sendTextMessage(phone, null, smsContent, null, null)
+            SmsManager.sendTextMessage(phone, null, smsContent, null, null)
         }
     }
 }

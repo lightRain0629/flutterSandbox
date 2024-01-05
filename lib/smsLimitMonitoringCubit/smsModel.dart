@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:hive/hive.dart';
 
+part 'smsModel.g.dart';
+
 @HiveType(typeId: 3)
 class SmsModel {
   @HiveField(0)
