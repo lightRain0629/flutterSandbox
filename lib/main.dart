@@ -14,6 +14,7 @@ import 'package:flutter_bloc_tests/savingOrderTest/presentation/expansionTileTes
 import 'package:flutter_bloc_tests/selecableListView/secondVariantList.dart';
 import 'package:flutter_bloc_tests/selecableListView/selectableListScreen.dart';
 import 'package:flutter_bloc_tests/sendSmsService/sendSmsTest.dart';
+import 'package:flutter_bloc_tests/testFolder/sendSmsTest/sendSmsTest.dart';
 import 'package:flutter_bloc_tests/testUserAgent/testLoginPage.dart';
 import 'package:flutter_bloc_tests/webSocketsTest/socketIOtemp.dart';
 import 'package:flutter_bloc_tests/webSocketsTest/webSocketPage.dart';
@@ -104,7 +105,7 @@ class MyApp extends StatelessWidget {
         //   channel: WebSocketChannel.connect(Uri.parse("ws://echo.websocket.org")),
         // ),
         // home: BuildWithSocketStream(),
-        home: WStest(),
+        home: SendSMSTest(),
         routes: {
           NotificationScreen.route: (context) => const NotificationScreen()
         },
