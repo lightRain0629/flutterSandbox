@@ -1,24 +1,33 @@
 part of 'sms_limit_monitoring_cubit.dart';
 
 class SmsLimitMonitoringState extends Equatable {
-  final List<SmsModel> smsList;
-  const SmsLimitMonitoringState({required this.smsList});
+  final List<SmsModel> smsListSimFirst;
+  final List<SmsModel> smsListSimSecond;
+  const SmsLimitMonitoringState({required this.smsListSimFirst, required this.smsListSimSecond});
 
   @override
-  List<Object> get props => [smsList];
+  List<Object> get props => [smsListSimFirst, smsListSimSecond];
 
     Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'smsList': smsList.map((sms) => sms.toMap()).toList()
+      'smsListSimFirst': smsListSimFirst.map((sms) => sms.toMap()).toList(),
+      'smsListSimSecond': smsListSimSecond.map((sms) => sms.toMap()).toList()
     };
   }
 
     factory SmsLimitMonitoringState.fromMap(Map<String, dynamic> map) {
     return SmsLimitMonitoringState(
-        smsList: map['smsList']
+        smsListSimFirst: map['smsListSimFirst']
             .map<SmsModel>(SmsModel.fromJson)
-            .toList());
+            .toList(),
+            smsListSimSecond: map['smsListSimSecond']
+            .map<SmsModel>(SmsModel.fromJson)
+            .toList()
+             );
   }
-
    String toJson() => json.encode(toMap());
+
+    factory SmsLimitMonitoringState.fromJson(String source) =>
+      SmsLimitMonitoringState.fromMap(json.decode(source) as Map<String, dynamic>);
+
 }

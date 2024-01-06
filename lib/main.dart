@@ -14,11 +14,14 @@ import 'package:flutter_bloc_tests/savingOrderTest/presentation/expansionTileTes
 import 'package:flutter_bloc_tests/selecableListView/secondVariantList.dart';
 import 'package:flutter_bloc_tests/selecableListView/selectableListScreen.dart';
 import 'package:flutter_bloc_tests/sendSmsService/sendSmsTest.dart';
+import 'package:flutter_bloc_tests/smsLimitMonitoringCubit/cubit/sms_limit_monitoring_cubit.dart';
+import 'package:flutter_bloc_tests/smsLimitMonitoringCubit/models/smsModel.dart';
 import 'package:flutter_bloc_tests/testFolder/sendSmsTest/sendSmsTest.dart';
 import 'package:flutter_bloc_tests/testUserAgent/testLoginPage.dart';
 import 'package:flutter_bloc_tests/webSocketsTest/socketIOtemp.dart';
 import 'package:flutter_bloc_tests/webSocketsTest/webSocketPage.dart';
 import 'package:flutter_bloc_tests/webSocketsTest/wsTest.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc_tests/counterPresenation/colors/colorSchemes.dart';
 import 'package:flutter_bloc_tests/counterPresenation/routes/appRoutes.dart';
@@ -43,13 +46,18 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
+// TODO  test hydrated bloc for sent sms 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseApi().initNotifications();
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // await FirebaseApi().initNotifications();
   HydratedBloc.storage = await HydratedStorage.build(
       storageDirectory: await getApplicationDocumentsDirectory());
 
+  await Hive.initFlutter();
+
+  Hive.registerAdapter(SmsModelAdapter());
 
   runApp(MyApp(
     appRouter: AppRouter(),
@@ -72,6 +80,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<InternetCubit>(
           create: (context) => InternetCubit(connectivity: connectivity),
+        ),
+        BlocProvider<SmsLimitMonitoringCubit>(
+          create: (context) => SmsLimitMonitoringCubit(),
         ),
         BlocProvider<CounterCubit>(
           create: (context) => CounterCubit(),
@@ -105,7 +116,7 @@ class MyApp extends StatelessWidget {
         //   channel: WebSocketChannel.connect(Uri.parse("ws://echo.websocket.org")),
         // ),
         // home: BuildWithSocketStream(),
-        home: SendSMSTest(),
+        home: WStest(),
         routes: {
           NotificationScreen.route: (context) => const NotificationScreen()
         },
@@ -113,5 +124,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

@@ -84,25 +84,25 @@ class _SendSMSTestState extends State<SendSMSTest> {
     );
   }
 
-  _sendSms() async {
-    print('slot ' + simSlotIndexController.text);
-    print('phoneNumber to' + phoneNumberEditingController.text);
-    print('msg ' + msgEditingController.text);
-    await SmsSenderKt.sendSMS(
- 
-        int.parse(simSlotIndexController.text),
-        phoneNumberEditingController.text,
-        msgEditingController.text,
-        );
-  }
-
   // _sendSms() async {
   //   print('slot ' + simSlotIndexController.text);
-  //   print('phoneNumber ' + phoneNumberEditingController.text);
+  //   print('phoneNumber to' + phoneNumberEditingController.text);
   //   print('msg ' + msgEditingController.text);
-  //   SmsSenderServiceKt.sendSMS(
-  //       msgEditingController.text,
+  //   await SmsSenderKt.sendSMS(
+ 
   //       int.parse(simSlotIndexController.text),
-  //       phoneNumberEditingController.text);
+  //       phoneNumberEditingController.text,
+  //       msgEditingController.text,
+  //       );
   // }
+
+  _sendSms() async {
+    print('slot ' + simSlotIndexController.text);
+    print('phoneNumber ' + phoneNumberEditingController.text);
+    print('msg ' + msgEditingController.text);
+    SmsSenderServiceKt.sendSMS(
+        msgEditingController.text,
+        int.parse(simSlotIndexController.text),
+        phoneNumberEditingController.text);
+  }
 }

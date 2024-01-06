@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc_tests/smsLimitMonitoringCubit/helper/hasOneHourPassed.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-import '../smsModel.dart';
+import '../models/smsModel.dart';
 
 part 'sms_limit_monitoring_state.dart';
 
@@ -13,10 +13,12 @@ part 'sms_limit_monitoring_state.dart';
 
 class SmsLimitMonitoringCubit extends Cubit<SmsLimitMonitoringState>
     with HydratedMixin {
-  SmsLimitMonitoringCubit() : super(const SmsLimitMonitoringState(smsList: []));
+  SmsLimitMonitoringCubit()
+      : super(const SmsLimitMonitoringState(
+            smsListSimFirst: [], smsListSimSecond: []));
 
-  void addSms(SmsModel incomingSms) {
-    final List<SmsModel> smsListState = List.from(state.smsList);
+  void addSmsToFirstSim(SmsModel incomingSms) {
+    final List<SmsModel> smsListState = List.from(state.smsListSimFirst);
     final List<SmsModel> newSmsListState = [];
     for (var i = 0; i < smsListState.length; i++) {
       bool isPassed = hasOneHourPassed(smsListState[i].sentDate);
@@ -24,26 +26,50 @@ class SmsLimitMonitoringCubit extends Cubit<SmsLimitMonitoringState>
         newSmsListState.add(smsListState[i]);
       }
     }
-    emit(
-        SmsLimitMonitoringState(smsList: List.from(newSmsListState)..add(incomingSms)));
+    emit(SmsLimitMonitoringState(
+        smsListSimFirst: List.from(newSmsListState)..add(incomingSms),
+        smsListSimSecond: state.smsListSimSecond));
+  }
+
+  void addSmsToSecondSim(SmsModel incomingSms) {
+    final List<SmsModel> smsListState = List.from(state.smsListSimSecond);
+    final List<SmsModel> newSmsListState = [];
+    for (var i = 0; i < smsListState.length; i++) {
+      bool isPassed = hasOneHourPassed(smsListState[i].sentDate);
+      if (!isPassed) {
+        newSmsListState.add(smsListState[i]);
+      }
+    }
+    emit(SmsLimitMonitoringState(
+        smsListSimFirst: state.smsListSimFirst,
+        smsListSimSecond: List.from(newSmsListState)..add(incomingSms)));
   }
 
   // void addSms(SmsModel sms) => emit(
   //     SmsLimitMonitoringState(smsList: List.from(state.smsList)..add(sms)));
 
-  void clearSmsList() => emit(const SmsLimitMonitoringState(smsList: []));
+  void clearSmsList() => emit(
+      const SmsLimitMonitoringState(smsListSimFirst: [], smsListSimSecond: []));
 
   @override
   SmsLimitMonitoringState? fromJson(Map<String, dynamic> json) {
-    final smsList =
-        (json['smsList'] as List<dynamic>).cast<Map<String, dynamic>>();
+    print(state.toString() + 'into from json');
+    print(json.toString() + 'yo man im json');
+    final smsListSimFirst =
+        (json['smsListSimFirst'] as List<dynamic>).cast<Map<String, dynamic>>();
+    final smsListSimSecond = (json['smsListSimSecond'] as List<dynamic>)
+        .cast<Map<String, dynamic>>();
 
     return SmsLimitMonitoringState(
-        smsList: smsList.map((sms) => SmsModel.fromJson(smsList)).toList());
+        smsListSimFirst:
+            smsListSimFirst.map((sms) => SmsModel.fromJson(sms)).toList(),
+        smsListSimSecond:
+            smsListSimSecond.map((sms) => SmsModel.fromJson(sms)).toList());
   }
 
   @override
   Map<String, dynamic>? toJson(SmsLimitMonitoringState state) {
+    print(state.toMap());
     return state.toMap();
   }
 }

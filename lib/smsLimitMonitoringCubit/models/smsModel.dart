@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 
 part 'smsModel.g.dart';
 
-@HiveType(typeId: 3)
+@HiveType(typeId: 4)
 class SmsModel {
   @HiveField(0)
   final int id;
@@ -35,17 +35,19 @@ class SmsModel {
     return <String, dynamic>{
       'id': id,
       'msg': msg,
-      'sentDate': sentDate.millisecondsSinceEpoch,
+      'sentDate': sentDate.toString(),
       'phoneNumber': phoneNumber,
       'sentSlot': sentSlot,
+      'locale' : locale,
+      'symbols' : symbols
     };
   }
 
-  factory SmsModel.fromMap(Map<String, dynamic> map) {
+  static fromMap(Map<String, dynamic> map) {
     return SmsModel(
       id: map['id'] as int,
       msg: map['msg'] as String,
-      sentDate: DateTime.fromMillisecondsSinceEpoch(map['sentDate'] as int),
+      sentDate: DateTime.parse(map['sentDate'] as String),
       phoneNumber: map['phoneNumber'] as String,
       sentSlot: map['sentSlot'] as int,
       locale: map['locale'] as String,

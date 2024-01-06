@@ -8,7 +8,7 @@ part of 'smsModel.dart';
 
 class SmsModelAdapter extends TypeAdapter<SmsModel> {
   @override
-  final int typeId = 3;
+  final int typeId = 4;
 
   @override
   SmsModel read(BinaryReader reader) {
