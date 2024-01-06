@@ -5,8 +5,6 @@ class SmsLimitMonitoringState extends Equatable {
   final List<SmsModel> smsListSimSecond;
   const SmsLimitMonitoringState({required this.smsListSimFirst, required this.smsListSimSecond});
 
-  @override
-  List<Object> get props => [smsListSimFirst, smsListSimSecond];
 
     Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -29,5 +27,8 @@ class SmsLimitMonitoringState extends Equatable {
 
     factory SmsLimitMonitoringState.fromJson(String source) =>
       SmsLimitMonitoringState.fromMap(json.decode(source) as Map<String, dynamic>);
+      
+  @override
+  List<Object> get props => [smsListSimFirst, smsListSimSecond];
 
 }
