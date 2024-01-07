@@ -28,7 +28,7 @@ class SecondSimLogBody extends StatelessWidget {
             return ListTile(
                   title: Text(sms.id.toString()),
                   subtitle: Text(
-                      'Sent date ${DateFormat('Hms').format(sms.sentDate)} ${DateFormat('dd.MM.yyyy').format(sms.sentDate)}'),
+                      'Sent date ${DateFormat('Hms').format(DateTime.parse(sms.sentDate))} ${DateFormat('dd.MM.yyyy').format(DateTime.parse(sms.sentDate))}'),
                 );
           });
         }

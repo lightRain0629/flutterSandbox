@@ -20,7 +20,7 @@ class SmsLimitMonitoringCubit extends Cubit<SmsLimitMonitoringState> with Hydrat
     final List<SmsModel> smsListState = List.from(state.smsListSimFirst);
     final List<SmsModel> newSmsListState = [];
     for (var i = 0; i < smsListState.length; i++) {
-      bool isPassed = hasOneHourPassed(smsListState[i].sentDate);
+      bool isPassed = hasOneHourPassed(DateTime.parse(smsListState[i].sentDate));
       if (!isPassed) {
         newSmsListState.add(smsListState[i]);
       }
@@ -34,7 +34,7 @@ class SmsLimitMonitoringCubit extends Cubit<SmsLimitMonitoringState> with Hydrat
     final List<SmsModel> smsListState = List.from(state.smsListSimSecond);
     final List<SmsModel> newSmsListState = [];
     for (var i = 0; i < smsListState.length; i++) {
-      bool isPassed = hasOneHourPassed(smsListState[i].sentDate);
+      bool isPassed = hasOneHourPassed(DateTime.parse(smsListState[i].sentDate));
       if (!isPassed) {
         newSmsListState.add(smsListState[i]);
       }
@@ -51,8 +51,7 @@ class SmsLimitMonitoringCubit extends Cubit<SmsLimitMonitoringState> with Hydrat
       const SmsLimitMonitoringState(smsListSimFirst: [], smsListSimSecond: []));
 
   @override
-  SmsLimitMonitoringState? fromJson(Map<String, dynamic> json) {
-    print(state.toString() + 'into from json');
+  SmsLimitMonitoringState fromJson(Map<String, dynamic> json) {
     print(json.toString() + 'yo man im json');
     final smsListSimFirst =
         (json['smsListSimFirst'] as List<dynamic>).cast<Map<String, dynamic>>();

@@ -11,7 +11,7 @@ class SmsModel {
   @HiveField(1)
   final String msg;
   @HiveField(2)
-  final DateTime sentDate;
+  final String sentDate;
   @HiveField(3)
   final String phoneNumber;
   @HiveField(4)
@@ -35,7 +35,7 @@ class SmsModel {
     return <String, dynamic>{
       'id': id,
       'msg': msg,
-      'sentDate': sentDate.toString(),
+      'sentDate': sentDate,
       'phoneNumber': phoneNumber,
       'sentSlot': sentSlot,
       'locale' : locale,
@@ -47,7 +47,7 @@ class SmsModel {
     return SmsModel(
       id: map['id'] as int,
       msg: map['msg'] as String,
-      sentDate: DateTime.parse(map['sentDate'] as String),
+      sentDate: map['sentDate'] as String,
       phoneNumber: map['phoneNumber'] as String,
       sentSlot: map['sentSlot'] as int,
       locale: map['locale'] as String,
@@ -60,7 +60,7 @@ class SmsModel {
   static SmsModel fromJson(json) => SmsModel(
       id: json['id'],
       msg: json['msg'],
-      sentDate: DateTime.parse(json['sentDate']),
+      sentDate: json['sentDate'],
       phoneNumber: json['phoneNumber'],
       sentSlot: json['sentSlot'],
       locale: json['locale'],

@@ -19,7 +19,7 @@ class SmsModelAdapter extends TypeAdapter<SmsModel> {
     return SmsModel(
       id: fields[0] as int,
       msg: fields[1] as String,
-      sentDate: fields[2] as DateTime,
+      sentDate: fields[2] as String,
       phoneNumber: fields[3] as String,
       sentSlot: fields[4] as int,
       locale: fields[5] as String,

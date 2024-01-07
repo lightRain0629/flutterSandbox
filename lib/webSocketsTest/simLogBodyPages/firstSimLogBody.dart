@@ -23,7 +23,7 @@ class FirstSimLogBody extends StatelessWidget {
             itemBuilder: (context, index) {
             final sms = state.smsListSimFirst[index];
             return ListTile(title: Text(sms.id.toString()),subtitle: Text('Sent date ${DateFormat('Hms')
-                      .format(sms.sentDate)} ${DateFormat('dd.MM.yyyy').format(sms.sentDate)}'),);
+                      .format(DateTime.parse(sms.sentDate))} ${DateFormat('dd.MM.yyyy').format(DateTime.parse(sms.sentDate))}'),);
           });
         }
       },

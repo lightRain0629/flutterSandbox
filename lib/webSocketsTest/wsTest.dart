@@ -63,7 +63,7 @@ class _WStestState extends State<WStest> {
                   .smsListSimFirst
                   .length,
               msg: 'connected',
-              sentDate: DateTime.now(),
+              sentDate: DateTime.now().toString(),
               phoneNumber: '+99362939884',
               sentSlot: 1,
               locale: 'eng',
@@ -104,7 +104,7 @@ class _WStestState extends State<WStest> {
                           id: state.smsListSimSecond.length,
                           msg:
                               'Message with id ${state.smsListSimSecond.length}',
-                          sentDate: DateTime.now(),
+                          sentDate: DateTime.now().toString(),
                           phoneNumber: '901209',
                           sentSlot: 2,
                           locale: 'eng',
