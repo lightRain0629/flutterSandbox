@@ -34,6 +34,8 @@ import 'counterAndInetLogic/cubit/cubitInternet/internet_cubit.dart';
 import 'counterAndInetLogic/cubit/settings_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+
+import 'counterPresenation/counterTestScreens/settingsPage.dart';
 /**
  * sms quote in eng keyboard is 145 symbols (1 sms is 145) 
  * sms quote in ru keyboard is 60 symbols (1 sms is 60)
@@ -44,9 +46,11 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
  * SEND SMS TO CUSOTMER
  */
 
+//! reason why hydrated bloc isnt worked... cuz HydratedMixin isnt work anymore solution is add Hydrated prefix to Bloc extension
+
 final navigatorKey = GlobalKey<NavigatorState>();
 
-// TODO  test hydrated bloc for sent sms 
+// TODO  test hydrated bloc for sent sms
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

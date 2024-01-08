@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_tests/smsLimitMonitoringCubit/cubit/sms_limit_monitoring_cubit.dart';
@@ -8,9 +6,8 @@ import 'package:flutter_bloc_tests/webSocketsTest/simLogBodyPages/firstSimLogBod
 import 'package:flutter_bloc_tests/webSocketsTest/simLogBodyPages/secondSimLogBody.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:telephony/telephony.dart';
-import 'package:uuid/uuid.dart';
 
-// TODO sendOTP: {phoneNumber: +99363384289, code: 2925} this is payload
+// TODO sendOTP: {phoneNumber: +99363384289, code: 2925} this is expamle of payload
 /**
  * U must send otp to phoneNumber from payload and code as msg
  * 1) Write sms monitoring service
@@ -44,7 +41,7 @@ class _WStestState extends State<WStest> {
   }
 
   void initSocket() {
-    socket = IO.io('http://95.85.116.130:235', <String, dynamic>{
+    socket = IO.io('http://95.85.116.130:233', <String, dynamic>{
       // ! global uri
       // socket = IO.io('http://10.10.12.33:3001', <String, dynamic>{
       // ! local uri
