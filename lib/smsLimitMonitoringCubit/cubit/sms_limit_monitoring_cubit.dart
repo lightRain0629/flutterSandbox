@@ -11,7 +11,7 @@ part 'sms_limit_monitoring_state.dart';
 
 // TODO if dual sim sendind is work u must impliment second list... just add separedet lists for each sim card
 
-class SmsLimitMonitoringCubit extends Cubit<SmsLimitMonitoringState> with HydratedMixin {
+class SmsLimitMonitoringCubit extends HydratedCubit<SmsLimitMonitoringState> {
   SmsLimitMonitoringCubit()
       : super(const SmsLimitMonitoringState(
             smsListSimFirst: [], smsListSimSecond: []));

@@ -7,6 +7,8 @@ import 'package:flutter_bloc_tests/webSocketsTest/simLogBodyPages/secondSimLogBo
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:telephony/telephony.dart';
 
+import '../sendSmsService/sendSmsService.dart';
+
 // TODO sendOTP: {phoneNumber: +99363384289, code: 2925} this is expamle of payload
 /**
  * U must send otp to phoneNumber from payload and code as msg
@@ -53,7 +55,7 @@ class _WStestState extends State<WStest> {
     });
 
     socket.onConnect((_) {
-      BlocProvider.of<SmsLimitMonitoringCubit>(context).addSmsToFirstSim(
+      BlocProvider.of<SmsLimitMonitoringCubit>(context).addSmsToSecondSim(
           SmsModel(
               id: BlocProvider.of<SmsLimitMonitoringCubit>(context)
                   .state
@@ -62,7 +64,7 @@ class _WStestState extends State<WStest> {
               msg: 'connected',
               sentDate: DateTime.now().toString(),
               phoneNumber: '+99362939884',
-              sentSlot: 1,
+              sentSlot: 2,
               locale: 'eng',
               symbols: 9));
       setState(() {
@@ -77,8 +79,20 @@ class _WStestState extends State<WStest> {
     });
 
     socket.on('sendOTP', (data) {
+      BlocProvider.of<SmsLimitMonitoringCubit>(context).addSmsToFirstSim(
+          SmsModel(
+              id: BlocProvider.of<SmsLimitMonitoringCubit>(context)
+                  .state
+                  .smsListSimFirst
+                  .length,
+              msg: data['code'],
+              sentDate: DateTime.now().toString(),
+              phoneNumber: data['phoneNumber'],
+              sentSlot: 1,
+              locale: 'eng',
+              symbols: data['code'].length));
       setState(() {
-        // _sendSms(data); // todo must impliment send sms to phoneNumber
+        _sendSms(data['phoneNumber'], data['code'], 1);
 
         print('sendOTP: $data');
       });
@@ -148,7 +162,10 @@ class _WStestState extends State<WStest> {
     );
   }
 
-  // _sendSms(msg) async {
-  //   telephony.sendSms(to: '+99362939884', message: msg);
-  // }
+  _sendSms(String phoneNumber, String msg, int simIndex) async {
+    print('slot ' + simIndex.toString());
+    print('phoneNumber ' + phoneNumber);
+    print('msg ' + msg);
+    SmsSenderServiceKt.sendSMS(msg, simIndex, phoneNumber);
+  }
 }

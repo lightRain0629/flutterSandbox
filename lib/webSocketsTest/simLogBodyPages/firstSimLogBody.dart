@@ -19,12 +19,15 @@ class FirstSimLogBody extends StatelessWidget {
           );
         } else {
           return ListView.builder(
-            itemCount: state.smsListSimFirst.length,
-            itemBuilder: (context, index) {
-            final sms = state.smsListSimFirst[index];
-            return ListTile(title: Text(sms.id.toString()),subtitle: Text('Sent date ${DateFormat('Hms')
-                      .format(DateTime.parse(sms.sentDate))} ${DateFormat('dd.MM.yyyy').format(DateTime.parse(sms.sentDate))}'),);
-          });
+              itemCount: state.smsListSimFirst.length,
+              itemBuilder: (context, index) {
+                final sms = state.smsListSimFirst[index];
+                return ListTile(
+                  title: Text('Msg: ${sms.msg}, To: ${sms.phoneNumber}'),
+                  subtitle: Text(
+                      'Sent date ${DateFormat('Hms').format(DateTime.parse(sms.sentDate))} ${DateFormat('dd.MM.yyyy').format(DateTime.parse(sms.sentDate))}'),
+                );
+              });
         }
       },
     );

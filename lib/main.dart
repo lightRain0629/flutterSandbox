@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_background/flutter_background.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_tests/counterPresenation/counterTestScreens/homePage.dart';
 import 'package:flutter_bloc_tests/firebase_options.dart';
@@ -46,8 +47,6 @@ import 'counterPresenation/counterTestScreens/settingsPage.dart';
  * SEND SMS TO CUSOTMER
  */
 
-//! reason why hydrated bloc isnt worked... cuz HydratedMixin isnt work anymore solution is add Hydrated prefix to Bloc extension
-
 final navigatorKey = GlobalKey<NavigatorState>();
 
 // TODO  test hydrated bloc for sent sms
@@ -62,6 +61,20 @@ void main() async {
   await Hive.initFlutter();
 
   Hive.registerAdapter(SmsModelAdapter());
+
+  const androidConfig = FlutterBackgroundAndroidConfig(
+    showBadge: true,
+    enableWifiLock: true,
+    notificationTitle: "flutter_background example app",
+    notificationText:
+        "Background notification for keeping the example app running in the background",
+    notificationImportance: AndroidNotificationImportance.Max,
+    notificationIcon:
+        AndroidResource(name: 'background_icon', defType: 'drawable'),
+  );
+
+  await FlutterBackground.initialize(androidConfig: androidConfig);
+  await FlutterBackground.enableBackgroundExecution();
 
   runApp(MyApp(
     appRouter: AppRouter(),

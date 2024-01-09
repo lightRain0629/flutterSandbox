@@ -26,7 +26,7 @@ class SecondSimLogBody extends StatelessWidget {
             itemBuilder: (context, index) {
             final sms = state.smsListSimSecond[index];
             return ListTile(
-                  title: Text(sms.id.toString()),
+                  title: Text('Msg: ${sms.msg}, To: ${sms.phoneNumber}'),
                   subtitle: Text(
                       'Sent date ${DateFormat('Hms').format(DateTime.parse(sms.sentDate))} ${DateFormat('dd.MM.yyyy').format(DateTime.parse(sms.sentDate))}'),
                 );
