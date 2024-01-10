@@ -22,6 +22,7 @@ import 'package:flutter_bloc_tests/testUserAgent/testLoginPage.dart';
 import 'package:flutter_bloc_tests/webSocketsTest/socketIOtemp.dart';
 import 'package:flutter_bloc_tests/webSocketsTest/webSocketPage.dart';
 import 'package:flutter_bloc_tests/webSocketsTest/wsTest.dart';
+import 'package:flutter_foreground_service/flutter_foreground_service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc_tests/counterPresenation/colors/colorSchemes.dart';
@@ -30,6 +31,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:workmanager/workmanager.dart';
 import 'counterAndInetLogic/cubit/couter_cubit_cubit.dart';
 import 'counterAndInetLogic/cubit/cubitInternet/internet_cubit.dart';
 import 'counterAndInetLogic/cubit/settings_cubit.dart';
@@ -49,10 +51,35 @@ import 'counterPresenation/counterTestScreens/settingsPage.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
-// TODO  test hydrated bloc for sent sms
+// const bgTask = "bgTask";
+
+// void callbackDispatcher() {
+//   Workmanager().executeTask((task, inputData) async {
+//     switch (task) {
+//       case bgTask:
+//         print('bg task');
+//         break;
+//     }
+//     return Future.value(true);
+//   });
+// }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // await Workmanager().initialize(
+  //   callbackDispatcher,
+  //   isInDebugMode: true
+  // );
+  // await Workmanager().registerPeriodicTask(
+  //   "1",
+  //   bgTask,
+  //   frequency: const Duration(minutes: 20),
+  //   constraints: Constraints(
+  //     networkType: NetworkType.connected,
+  //   ),
+  // );
+
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // await FirebaseApi().initNotifications();
   HydratedBloc.storage = await HydratedStorage.build(
@@ -80,6 +107,7 @@ void main() async {
     appRouter: AppRouter(),
     connectivity: Connectivity(),
   ));
+   ForegroundService().start();
 }
 
 class MyApp extends StatelessWidget {

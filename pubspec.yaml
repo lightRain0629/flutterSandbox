@@ -56,6 +56,8 @@ dependencies:
   telephony: ^0.2.0
   socket_io_client: ^2.0.3+1
   flutter_background: ^1.2.0
+  workmanager: ^0.5.1
+  flutter_foreground_service: ^0.4.1
   # long_press_selectable: ^3.0.1
   
 

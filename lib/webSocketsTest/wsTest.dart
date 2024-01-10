@@ -16,8 +16,7 @@ import '../sendSmsService/sendSmsService.dart';
  * 2) check dual sim sending
  * 3) 404 status code is no online sender device
  * 4) 429 status code... in 1 minute available 2 sms... after 1 minute u can add resend functionality
- * 5) otp functionality available only production server... 235 port... in swagger this endpoint is not available
- * 6) 409 status code mean account already exist or conflict... if customer want to register on second time i must navigate to login page with 
+ * 5) 409 status code mean account already exist or conflict... if customer want to register on second time i must navigate to login page with 
  * pop up this account already exist
  */
 
